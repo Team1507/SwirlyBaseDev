@@ -5,13 +5,30 @@
 #include "RobotContainer.h"
 
 #include <frc2/command/Commands.h>
+#include "commands/CmdDriveWithGamepad.h"
 
-RobotContainer::RobotContainer() {
+RobotContainer::RobotContainer() 
+{
+
+  //******************** Subsystem Defaults ******************************
+  m_drivetrain.SetDefaultCommand( CmdDriveWithGamepad() );
+
+
+
+  //******************** Dashboard Buttons *******************************
+
+
   ConfigureBindings();
 }
 
-void RobotContainer::ConfigureBindings() {}
+void RobotContainer::ConfigureBindings() 
+{
 
-frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
+}
+
+
+
+frc2::CommandPtr RobotContainer::GetAutonomousCommand() 
+{
   return frc2::cmd::Print("No autonomous command configured");
 }

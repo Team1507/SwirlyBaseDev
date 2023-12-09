@@ -8,6 +8,8 @@
 #include <frc/XboxController.h>
 #include <frc/Timer.h>
 
+#include "subsystems/Drivetrain.h"
+
 class RobotContainer {
  public:
   RobotContainer();
@@ -18,7 +20,7 @@ class RobotContainer {
   frc::Timer m_timer;
 
   //****************Subsystems*******************
-  //Drivetrain m_drivetrain;
+  Drivetrain m_drivetrain;
 
 
 
