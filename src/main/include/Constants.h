@@ -24,7 +24,8 @@
 #define REAR_RIGHT_STEER_ENCODER_CAN_ID    12
 //------------------------------------------
 
-
+#define MAX_DRIVE_TEMP_WARNING             25.0
+#define MAX_DRIVE_TEMP_FAULT               60.0
 
 
 
