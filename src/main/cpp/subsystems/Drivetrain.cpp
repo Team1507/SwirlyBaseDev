@@ -30,7 +30,7 @@
 
 #define C2M_D   sqrtf(W_DIV_2*W_DIV_2 + H_DIV_2*H_DIV_2 )       //Center-to-module distance 
 
-#define MINIMUM_NEEDED_POWER 0.025        //minimum power needed to move
+#define MINIMUM_NEEDED_POWER 0.01        //minimum power needed to move
 #define NORMALIZATION_POWER  0.9
 
 #define MINIMUM_NEEDED_SPEED 100 //<< FIXME!  units??

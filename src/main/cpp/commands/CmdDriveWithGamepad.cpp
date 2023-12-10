@@ -44,11 +44,23 @@ void CmdDriveWithGamepad::Execute()
   const float xyScaleValue  = 0.5;
   const float rScaleValue   = 0.3;
 
+  const float DEADBAND  = 0.10;
 
-  // //Square Inputs???
-  // leftY  = ( leftY  < 0 ) ? -pow(  leftY,  2) : pow(  leftY,  2);
-  // leftX  = ( leftX  < 0 ) ? -pow(  leftX,  2) : pow(  leftX,  2);
-  // rightX = ( rightX < 0 ) ? -pow( rightX,  2) : pow( rightX,  2);
+  //Square Inputs???
+  leftY  = ( leftY  < 0 ) ? -pow(  leftY,  2) : pow(  leftY,  2);
+  leftX  = ( leftX  < 0 ) ? -pow(  leftX,  2) : pow(  leftX,  2);
+  rightX = ( rightX < 0 ) ? -pow( rightX,  2) : pow( rightX,  2);
+
+  //Apply DeadBand
+  if (fabs(leftY)  < DEADBAND) leftY  = 0;
+  if (fabs(leftX)  < DEADBAND) leftX  = 0;
+  if (fabs(rightX) < DEADBAND) rightX = 0;
+
+  //Subtract off deadband for smooth transition 
+  if (fabs(leftY) >= DEADBAND) leftY  +=   (leftY>0)? -DEADBAND : +DEADBAND;
+  if (fabs(leftX) >= DEADBAND) leftX  +=   (leftX>0)? -DEADBAND : +DEADBAND;
+  if (fabs(rightX)>= DEADBAND) rightX +=  (rightX>0)? -DEADBAND : +DEADBAND;
+
 
   //Apply max velocity and scaling
   float fwdrev    = -(leftY  * xyMaxVelocity * xyScaleValue);    //Invert Axis, make positive forward
@@ -68,6 +80,10 @@ void CmdDriveWithGamepad::Execute()
 
   frc::SmartDashboard::PutNumber("Loop Max", m_max_loop_time);
   frc::SmartDashboard::PutNumber("Loop Min", m_min_loop_time);
+
+  frc::SmartDashboard::PutNumber("DrvleftY", leftY);
+  frc::SmartDashboard::PutNumber("DrvleftX", leftX);
+  frc::SmartDashboard::PutNumber("DrvrightX", rightX);
 
 }
 
