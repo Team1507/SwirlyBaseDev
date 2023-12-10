@@ -5,7 +5,10 @@
 #include "RobotContainer.h"
 
 #include <frc2/command/Commands.h>
+#include <frc/smartdashboard/SmartDashboard.h>
+
 #include "commands/CmdDriveWithGamepad.h"
+#include "commands/CmdDriveTypeToggle.h"
 
 RobotContainer::RobotContainer() 
 {
@@ -16,7 +19,9 @@ RobotContainer::RobotContainer()
 
 
   //******************** Dashboard Buttons *******************************
+  frc::SmartDashboard::PutData( "CmdDriveTypeToggle",    new CmdDriveTypeToggle());
 
+  
 
   ConfigureBindings();
 }

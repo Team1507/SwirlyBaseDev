@@ -72,8 +72,7 @@ const vector_t moduleRotationVector[] = {
 
 Drivetrain::Drivetrain()
 {
-    frc::SmartDashboard::PutNumber("NORMALIZATION_POWER",NORMALIZATION_POWER);
-    m_driveType = ROBOTCENTRIC;
+    m_driveType = FIELDCENTRIC;
 
     //Setup module list
     m_moduleList[FR_INDEX] = &m_frontRight;    
@@ -88,6 +87,8 @@ void Drivetrain::Periodic()
 {
     OdometryPeriodic();
     m_falcAvg = ((m_frontRight.GetFalconTemp() + m_frontLeft.GetFalconTemp() + m_rearRight.GetFalconTemp() + m_rearLeft.GetFalconTemp()) / 4.0 );
+
+    frc::SmartDashboard::PutBoolean( "DriveType", m_driveType);
 
 }
 

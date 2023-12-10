@@ -86,6 +86,10 @@ void WriteToSmartDashboard(void)
   frc::SmartDashboard::PutNumber("Xbox Right-X",  robotcontainer.m_xbox.GetRightX()   ); 
 
 
+  //Nax-X
+  frc::SmartDashboard::PutBoolean("navx_IsConn",  robotcontainer.m_drivetrain.IsGyroConnected() );
+  frc::SmartDashboard::PutNumber("navx_Yaw",      robotcontainer.m_drivetrain.GetGyroYaw()      );
+  frc::SmartDashboard::PutNumber("navx_Angle",    robotcontainer.m_drivetrain.GetGyroAngle()    );
 
 
 
