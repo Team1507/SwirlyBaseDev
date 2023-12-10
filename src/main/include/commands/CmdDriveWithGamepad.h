@@ -26,4 +26,11 @@ class CmdDriveWithGamepad
   void End(bool interrupted) override;
 
   bool IsFinished() override;
+
+  private:
+
+    float m_max_loop_time;
+    float m_min_loop_time;
+
+
 };

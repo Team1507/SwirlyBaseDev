@@ -2,12 +2,18 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
+#include <frc/smartdashboard/SmartDashboard.h>
+
 #include "Robot.h"
 #include "commands/CmdDriveWithGamepad.h"
 #include <cmath>
 
 CmdDriveWithGamepad::CmdDriveWithGamepad() 
 {
+
+  m_max_loop_time = -1.0;
+  m_min_loop_time =  1.0;
+
   SetName("CmdDriveWithGamepad");
   AddRequirements( &robotcontainer.m_drivetrain );
 }
@@ -24,6 +30,9 @@ void CmdDriveWithGamepad::Initialize()
 void CmdDriveWithGamepad::Execute() 
 {
 
+  //
+  float loop_start_time = (float)frc::Timer::GetFPGATimestamp();
+
   //Get Gamepad input;
   float leftY  = robotcontainer.m_xbox.GetLeftY();
   float leftX  = robotcontainer.m_xbox.GetLeftX();
@@ -36,10 +45,10 @@ void CmdDriveWithGamepad::Execute()
   const float rScaleValue   = 0.3;
 
 
-  //Square Inputs???
-  leftY  = ( leftY  < 0 ) ? -pow(  leftY,  2) : pow(  leftY,  2);
-  leftX  = ( leftX  < 0 ) ? -pow(  leftX,  2) : pow(  leftX,  2);
-  rightX = ( rightX < 0 ) ? -pow( rightX,  2) : pow( rightX,  2);
+  // //Square Inputs???
+  // leftY  = ( leftY  < 0 ) ? -pow(  leftY,  2) : pow(  leftY,  2);
+  // leftX  = ( leftX  < 0 ) ? -pow(  leftX,  2) : pow(  leftX,  2);
+  // rightX = ( rightX < 0 ) ? -pow( rightX,  2) : pow( rightX,  2);
 
   //Apply max velocity and scaling
   float fwdrev    = -(leftY  * xyMaxVelocity * xyScaleValue);    //Invert Axis, make positive forward
@@ -51,6 +60,14 @@ void CmdDriveWithGamepad::Execute()
   else
     robotcontainer.m_drivetrain.FieldcentricDriveVelocity( fwdrev,  rightleft,  rotate );
 
+
+  float loop_time = (float)frc::Timer::GetFPGATimestamp() - loop_start_time;
+
+  if( loop_time > m_max_loop_time ) m_max_loop_time = loop_time;
+  if( loop_time < m_min_loop_time ) m_min_loop_time = loop_time;
+
+  frc::SmartDashboard::PutNumber("Loop Max", m_max_loop_time);
+  frc::SmartDashboard::PutNumber("Loop Min", m_min_loop_time);
 
 }
 
