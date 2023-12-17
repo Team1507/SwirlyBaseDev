@@ -15,7 +15,7 @@ class RobotContainer {
   RobotContainer();
 
   //****************Controllers*******************
-  frc::XboxController m_xbox {0};
+  frc::XboxController m_botDriver{0};
 
   frc::Timer m_timer;
 

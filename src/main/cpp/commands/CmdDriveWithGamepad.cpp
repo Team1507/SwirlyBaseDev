@@ -34,9 +34,9 @@ void CmdDriveWithGamepad::Execute()
   float loop_start_time = (float)frc::Timer::GetFPGATimestamp();
 
   //Get Gamepad input;
-  float leftY  = robotcontainer.m_xbox.GetLeftY();
-  float leftX  = robotcontainer.m_xbox.GetLeftX();
-  float rightX = robotcontainer.m_xbox.GetRightX();
+  float leftY  = robotcontainer.m_botDriver.GetLeftY();
+  float leftX  = robotcontainer.m_botDriver.GetLeftX();
+  float rightX = robotcontainer.m_botDriver.GetRightX();
 
   const float xyMaxVelocity = 19600; //
   const float rMaxVelocity  = 13000; //

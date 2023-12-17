@@ -81,9 +81,9 @@ void WriteToSmartDashboard(void)
 
 
   //XBox Controllers
-  frc::SmartDashboard::PutNumber("Xbox Left-Y",   robotcontainer.m_xbox.GetLeftY()    ); 
-  frc::SmartDashboard::PutNumber("Xbox Left-X",   robotcontainer.m_xbox.GetLeftX()    ); 
-  frc::SmartDashboard::PutNumber("Xbox Right-X",  robotcontainer.m_xbox.GetRightX()   ); 
+  frc::SmartDashboard::PutNumber("Xbox Left-Y",   robotcontainer.m_botDriver.GetLeftY()    ); 
+  frc::SmartDashboard::PutNumber("Xbox Left-X",   robotcontainer.m_botDriver.GetLeftX()    ); 
+  frc::SmartDashboard::PutNumber("Xbox Right-X",  robotcontainer.m_botDriver.GetRightX()   ); 
 
 
   //Nax-X
