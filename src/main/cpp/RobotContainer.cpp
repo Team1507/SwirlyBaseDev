@@ -9,6 +9,13 @@
 
 #include "commands/CmdDriveWithGamepad.h"
 #include "commands/CmdDriveTypeToggle.h"
+#include "commands/CmdCalibrateSwerveEncoders.h"
+#include "commands/CmdDriveClearAll.h"
+#include "commands/CmdDriveForceSteerAngle.h"
+#include "commands/GrpTest1.h"
+#include "commands/GrpTest2.h"
+#include "commands/CmdDriveZeroGyro.h"
+
 
 RobotContainer::RobotContainer() 
 {
@@ -21,7 +28,17 @@ RobotContainer::RobotContainer()
   //******************** Dashboard Buttons *******************************
   frc::SmartDashboard::PutData( "CmdDriveTypeToggle",    new CmdDriveTypeToggle());
 
-  
+  frc::SmartDashboard::PutData( "CmdDriveClearAll",      new CmdDriveClearAll());
+  frc::SmartDashboard::PutData( "GrpTest1",              new GrpTest1());
+  frc::SmartDashboard::PutData( "GrpTest2",              new GrpTest2());
+
+
+  //Smartdashboard SwerveDrive test/calibration buttons
+  frc::SmartDashboard::PutData( "SteerAngle=0",          new CmdDriveForceSteerAngle( &m_drivetrain, 0.0));
+  frc::SmartDashboard::PutData( "SteerAngle=90",         new CmdDriveForceSteerAngle(&m_drivetrain,  90.0));
+  frc::SmartDashboard::PutData( "CmdCalSwerveEnc_1",     new CmdCalibrateSwerveEncoders(&m_drivetrain, 1));
+  frc::SmartDashboard::PutData( "CmdCalSwerveEnc_2",     new CmdCalibrateSwerveEncoders(&m_drivetrain, 2));
+
 
   ConfigureBindings();
 }
