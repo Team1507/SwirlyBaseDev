@@ -9,6 +9,8 @@
 #include <frc/Timer.h>
 
 #include "subsystems/Drivetrain.h"
+#include "subsystems/LogFile.h"
+
 
 class RobotContainer {
  public:
@@ -21,7 +23,7 @@ class RobotContainer {
 
   //****************Subsystems*******************
   Drivetrain m_drivetrain;
-
+  LogFile    m_logFile;
 
 
 
