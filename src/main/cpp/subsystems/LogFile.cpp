@@ -13,6 +13,11 @@
 using namespace std;
 
 #define LOGFILEDIRNAME "/media/sda1/logs/"          //mounted USB Drive
+// ssh details:
+//      10.15.7.2
+//      User: admin
+//      Pwd:  -none-
+
 
 //Static File handler
 static std::ofstream logfile;
@@ -73,7 +78,7 @@ void LogFile::LogFileEnable( bool enable )
 /*******************************
  ** IsLogFileEnabled
  *******************************/
-bool IsLogFileEnabled(void)
+bool LogFile::IsLogFileEnabled(void)
 {
     return logfile.is_open();
 }

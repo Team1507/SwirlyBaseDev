@@ -24,6 +24,9 @@ void Robot::RobotInit()
 
 void Robot::RobotPeriodic() 
 {
+
+  robotcontainer.m_logFile.LogFilePeriodic();
+
   frc2::CommandScheduler::GetInstance().Run();
   WriteToSmartDashboard();
 }
@@ -98,6 +101,9 @@ void WriteToSmartDashboard(void)
   frc::SmartDashboard::PutNumber("FPGATime2",  (double)frc::Timer::GetFPGATimestamp() );              //(double) sec
   frc::SmartDashboard::PutNumber("TimeGet",    (double)robotcontainer.m_timer.Get() );                //Manual Timer sec
   frc::SmartDashboard::PutNumber("MatchTime",  (double)robotcontainer.m_timer.GetMatchTime() );       //Match Time
+
+  //Debug/Logging
+  frc::SmartDashboard::PutBoolean("Logging",  robotcontainer.m_logFile.IsLogFileEnabled() );
 
 
 }

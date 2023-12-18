@@ -8,6 +8,9 @@
 #include "commands/CmdDriveClearAll.h"
 #include "commands/CmdDriveStop.h"
 
+#include "commands/CmdLogFileEnable.h"
+#include "commands/CmdDriveToPoint.h"
+
 GrpTest1::GrpTest1() {
   AddCommands
   (
@@ -18,7 +21,11 @@ GrpTest1::GrpTest1() {
     //---------------------------------------
 
 
+    CmdLogFileEnable(true),
 
+    CmdDriveToPoint( 0.0, 24, 0, 2000, true, 5.0 ),
+
+    CmdLogFileEnable(false),
 
 
 
