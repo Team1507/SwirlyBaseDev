@@ -80,12 +80,41 @@ SwerveModule::SwerveModule(int driveMotorCanID, int steerMotorCanID, int steerEn
 
     m_steerMotor.ConfigAllowableClosedloopError( 0, 0.25 * STEER_ENCODER_TICKS_PER_DEGREE, 10 );
 
-
-
     //Initialise Steer Encoder
     m_steerEncoder.ConfigAbsoluteSensorRange(AbsoluteSensorRange::Signed_PlusMinus180 );    //Sets angle range as -180 to + 180
     m_steerEncoder.ConfigSensorDirection(false);                                            //+angle CounterClockwise turn
 
+
+
+    //Limit CAN bus utilization (and stale frame errors)
+    //Based on Talon FX API at:
+    //  https://docs.ctre-phoenix.com/en/stable/ch18_CommonAPI.html?highlight=Setting%20Status%20Frame%20Periods#setting-status-frame-periods
+    
+    // Status_1: Limit Switches and faults - not needed on swerve drive motors
+    m_steerMotor.SetStatusFramePeriod(StatusFrameEnhanced::Status_1_General, 200); 
+    m_driveMotor.SetStatusFramePeriod(StatusFrameEnhanced::Status_1_General, 201); 
+    // Status_2: Sensor Position and velocity sensors - Absoltely need.  Run at loop rate (Or should it be Faster??)
+    m_steerMotor.SetStatusFramePeriod(StatusFrameEnhanced::Status_2_Feedback0, 20); 
+    m_driveMotor.SetStatusFramePeriod(StatusFrameEnhanced::Status_2_Feedback0, 20); 
+    // Status_4: Sensor Temp -
+    m_steerMotor.SetStatusFramePeriod(StatusFrameEnhanced::Status_4_AinTempVbat, 101); 
+    m_driveMotor.SetStatusFramePeriod(StatusFrameEnhanced::Status_4_AinTempVbat, 101); 
+
+    //All others we don't care about
+    m_steerMotor.SetStatusFramePeriod(StatusFrameEnhanced::Status_3_Quadrature,   202); 
+    m_driveMotor.SetStatusFramePeriod(StatusFrameEnhanced::Status_3_Quadrature,   203); 
+    m_steerMotor.SetStatusFramePeriod(StatusFrameEnhanced::Status_8_PulseWidth,   204); 
+    m_driveMotor.SetStatusFramePeriod(StatusFrameEnhanced::Status_8_PulseWidth,   205); 
+    m_steerMotor.SetStatusFramePeriod(StatusFrameEnhanced::Status_10_MotionMagic, 206); 
+    m_driveMotor.SetStatusFramePeriod(StatusFrameEnhanced::Status_10_MotionMagic, 207); 
+    m_steerMotor.SetStatusFramePeriod(StatusFrameEnhanced::Status_12_Feedback1,   208); 
+    m_driveMotor.SetStatusFramePeriod(StatusFrameEnhanced::Status_12_Feedback1,   209); 
+    m_steerMotor.SetStatusFramePeriod(StatusFrameEnhanced::Status_13_Base_PIDF0,  210); 
+    m_driveMotor.SetStatusFramePeriod(StatusFrameEnhanced::Status_13_Base_PIDF0,  211); 
+    m_steerMotor.SetStatusFramePeriod(StatusFrameEnhanced::Status_14_Turn_PIDF1,  212); 
+    m_driveMotor.SetStatusFramePeriod(StatusFrameEnhanced::Status_14_Turn_PIDF1,  213); 
+    m_steerMotor.SetStatusFramePeriod(StatusFrameEnhanced::Status_21_FeedbackIntegrated,  214); 
+    m_driveMotor.SetStatusFramePeriod(StatusFrameEnhanced::Status_21_FeedbackIntegrated,  215); 
 
 
     //Init members
