@@ -20,6 +20,19 @@ void Robot::RobotInit()
   std::cout<<"RobotInit"<<std::endl;
   std::cout<<"FRC2023: SwirlyBaseDev"<<std::endl;
   std::cout<<"Version: " << __DATE__ <<"  "<<__TIME__<<std::endl<<std::endl; 
+
+
+
+  //Drivetrain Init
+  robotcontainer.m_drivetrain.Stop();
+  robotcontainer.m_drivetrain.HardResetDriveEncoders();
+  robotcontainer.m_drivetrain.ResetSteerEncoders();
+  robotcontainer.m_drivetrain.ZeroGyro(); 
+  robotcontainer.m_drivetrain.ResetOdometry();
+
+  //Subsystem Initialization
+
+
 }
 
 void Robot::RobotPeriodic() 
@@ -94,7 +107,10 @@ void WriteToSmartDashboard(void)
   frc::SmartDashboard::PutNumber("navx_Yaw",      robotcontainer.m_drivetrain.GetGyroYaw()      );
   frc::SmartDashboard::PutNumber("navx_Angle",    robotcontainer.m_drivetrain.GetGyroAngle()    );
 
-
+  //Odometry
+  frc::SmartDashboard::PutNumber("odo_X",         robotcontainer.m_drivetrain.GetOdometryX()       );
+  frc::SmartDashboard::PutNumber("odo_Y",         robotcontainer.m_drivetrain.GetOdometryY()       );
+  frc::SmartDashboard::PutNumber("odo_H",         robotcontainer.m_drivetrain.GetOdometryHeading() );
 
   //Time
   frc::SmartDashboard::PutNumber("FPGATime1",  (double)robotcontainer.m_timer.GetFPGATimestamp() );   //(double) sec

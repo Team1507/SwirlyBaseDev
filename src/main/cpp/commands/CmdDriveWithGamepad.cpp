@@ -38,8 +38,11 @@ void CmdDriveWithGamepad::Execute()
   float leftX  = robotcontainer.m_botDriver.GetLeftX();
   float rightX = robotcontainer.m_botDriver.GetRightX();
 
-  const float xyMaxVelocity = 19600; //
-  const float rMaxVelocity  = 13000; //
+  // const float xyMaxVelocity = 19600; //
+  // const float rMaxVelocity  = 13000; //
+
+  const float xyMaxVelocity = 10000; // Reduced Max speed ror testing
+  const float rMaxVelocity  = 6000;  // Reduced Max speed ror testing
 
   const float xyScaleValue  = 0.5;
   const float rScaleValue   = 0.3;
@@ -51,15 +54,16 @@ void CmdDriveWithGamepad::Execute()
   leftX  = ( leftX  < 0 ) ? -pow(  leftX,  2) : pow(  leftX,  2);
   rightX = ( rightX < 0 ) ? -pow( rightX,  2) : pow( rightX,  2);
 
-  //Apply DeadBand
-  if (fabs(leftY)  < DEADBAND) leftY  = 0;
-  if (fabs(leftX)  < DEADBAND) leftX  = 0;
-  if (fabs(rightX) < DEADBAND) rightX = 0;
+  // //Remove Deadband.  Reduces precision driving with huge deadband.
+  // //Apply DeadBand
+  // if (fabs(leftY)  < DEADBAND) leftY  = 0;
+  // if (fabs(leftX)  < DEADBAND) leftX  = 0;
+  // if (fabs(rightX) < DEADBAND) rightX = 0;
 
-  //Subtract off deadband for smooth transition 
-  if (fabs(leftY) >= DEADBAND) leftY  +=   (leftY>0)? -DEADBAND : +DEADBAND;
-  if (fabs(leftX) >= DEADBAND) leftX  +=   (leftX>0)? -DEADBAND : +DEADBAND;
-  if (fabs(rightX)>= DEADBAND) rightX +=  (rightX>0)? -DEADBAND : +DEADBAND;
+  // //Subtract off deadband for smooth transition 
+  // if (fabs(leftY) >= DEADBAND) leftY  +=   (leftY>0)? -DEADBAND : +DEADBAND;
+  // if (fabs(leftX) >= DEADBAND) leftX  +=   (leftX>0)? -DEADBAND : +DEADBAND;
+  // if (fabs(rightX)>= DEADBAND) rightX +=  (rightX>0)? -DEADBAND : +DEADBAND;
 
 
   //Apply max velocity and scaling
