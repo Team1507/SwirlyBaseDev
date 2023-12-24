@@ -42,6 +42,8 @@ void Robot::RobotPeriodic()
 
   frc2::CommandScheduler::GetInstance().Run();
   WriteToSmartDashboard();
+
+  robotcontainer.m_ledRing.LedRingPeriodic();
 }
 
 void Robot::DisabledInit() 

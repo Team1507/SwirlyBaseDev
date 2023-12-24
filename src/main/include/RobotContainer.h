@@ -10,6 +10,7 @@
 
 #include "subsystems/Drivetrain.h"
 #include "subsystems/LogFile.h"
+#include "subsystems/LedRing.h"
 
 
 class RobotContainer {
@@ -25,6 +26,7 @@ class RobotContainer {
   Drivetrain m_drivetrain;
   LogFile    m_logFile;
 
+  LedRing    m_ledRing;
 
 
   frc2::CommandPtr GetAutonomousCommand();
