@@ -23,7 +23,21 @@ GrpTest1::GrpTest1() {
 
     CmdLogFileEnable(true),
 
-    CmdDriveToPoint( 0.0, 24, 0, 2000, true, 5.0 ),
+    // CmdDriveToPoint(   0, 60, 0, 2000, false, 10.0 ),
+    // CmdDriveToPoint( -60, 60, 0, 2000, false, 10.0 ),
+    // CmdDriveToPoint( -60,  0, 0, 2000, false, 10.0 ),
+    // CmdDriveToPoint(   0,  0, 0, 2000, true, 10.0 ),
+
+    // CmdDriveToPoint( -60, 60, 0, 2000, false, 10.0 ),
+    // CmdDriveToPoint(   0, 60, 0, 2000, false, 10.0 ),
+    // CmdDriveToPoint( -60,  0, 0, 2000, false, 10.0 ),
+    // CmdDriveToPoint(   0,  0, 0, 2000, true,  10.0 ),
+
+    CmdDriveToPoint( -60, 60, -90, 2000, false, 10.0 ),
+    CmdDriveToPoint(   0, 60,   0, 2000, false, 10.0 ),
+    CmdDriveToPoint( -60,  0,  90, 2000, false, 10.0 ),
+    CmdDriveToPoint(   0,  0,   0, 2000, true,  10.0 ),
+
 
     CmdLogFileEnable(false),
 

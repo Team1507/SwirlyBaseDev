@@ -437,6 +437,22 @@ void Drivetrain::OdometryPeriodic(void)
     m_curr_x +=  ( delta_x * cosf(gyro_angle) ) + ( delta_y * sinf(gyro_angle) );    
     m_curr_y +=  ( delta_y * cosf(gyro_angle) ) - ( delta_x * sinf(gyro_angle) );    
 
+
+    //Calculate Velocity
+    float curr_timestamp = (double)frc::Timer::GetFPGATimestamp();  //Get current time
+    float delta_time = curr_timestamp - m_prev_timestamp;           //delta from last time
+
+    float delta_vx = (m_curr_x - m_prev_x)/delta_time;
+    float delta_vy = (m_curr_y - m_prev_y)/delta_time;
+
+    m_curr_v  =  sqrtf( delta_vx*delta_vx + delta_vy*delta_vy );    
+
+    //Update for next tick
+    m_prev_x = m_curr_x;
+    m_prev_y = m_curr_y;
+    m_prev_timestamp = curr_timestamp;
+
+
 }
 
 //********************************************
@@ -448,6 +464,11 @@ void Drivetrain::ResetOdometry(void)
     }
     m_curr_x  = 0.0;
     m_curr_y  = 0.0;
+
+    m_prev_x  = 0.0;
+    m_prev_y  = 0.0;
+    m_curr_v  = 0.0;
+    m_prev_timestamp = 0.0;
 }
 
 float  Drivetrain::GetOdometryX(void)
@@ -460,11 +481,16 @@ float  Drivetrain::GetOdometryY(void)
     return m_curr_y;
 }
 
-
 float  Drivetrain::GetOdometryHeading(void)
 {
     return GetGyroYaw();
 }
+float  Drivetrain::GetOdometryVelocity(void)
+{
+    return m_curr_v;
+}
+
+
 
 void Drivetrain::ForcePark(void)
 {
@@ -493,5 +519,11 @@ void Drivetrain::CalibrateSteerEncoderAbsoutePositionOffset(void)
 {
     for(int i=0;i<NUM_SWERVE_MODULES;i++)
         m_moduleList[i]->CalibrateSteerEncoderAbsoutePositionOffset();
+}
+
+//DebugOnly
+SwerveModule* Drivetrain::GetSwerveModulePtr(int module_num)
+{
+    return m_moduleList[module_num];
 }
 

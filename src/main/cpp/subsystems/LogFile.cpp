@@ -56,6 +56,12 @@ void LogFile::LogFilePeriodic( void )
     logfile << drivetrain->GetOdometryY()        << ","; // 3
     logfile << drivetrain->GetOdometryHeading()  << ","; // 4
 
+    logfile << drivetrain->GetOdometryVelocity() << ",";  //5
+
+    logfile << drivetrain->GetSwerveModulePtr(0)->GetModuleOdometryVel() << ",";  //6
+    logfile << drivetrain->GetSwerveModulePtr(1)->GetModuleOdometryVel() << ",";  //7
+    logfile << drivetrain->GetSwerveModulePtr(2)->GetModuleOdometryVel() << ",";  //8
+    logfile << drivetrain->GetSwerveModulePtr(3)->GetModuleOdometryVel() << ",";  //9
 
 
 
@@ -117,7 +123,15 @@ void LogFile::LogfileOpen(void)
 
         logfile << "X"          << ","; // 2:  X
         logfile << "Y"          << ","; // 3:  Y
-        logfile << "Vel"        << ","; // 4:  Heading
+        logfile << "Heading"    << ","; // 4:  Heading
+
+        logfile << "Velocity"   << ","; // 5:  Velocity
+        logfile << "V0"         << ","; // 6:  V0
+        logfile << "V1"         << ","; // 7:  V1
+        logfile << "V2"         << ","; // 8:  V2
+        logfile << "V3"         << ","; // 9:  V3
+
+
 
 
 

@@ -57,10 +57,15 @@ class Drivetrain : public frc2::SubsystemBase {
   float  GetOdometryX(void);           //inches
   float  GetOdometryY(void);           //inches
   float  GetOdometryHeading(void);     //degrees
+  float  GetOdometryVelocity(void);    //??
 
   //Absolute Encoder calibration
   void   CalibrateSteerEncoderAbsoutePositionStart(void);
   void   CalibrateSteerEncoderAbsoutePositionOffset(void);
+
+
+  // Get access to Swerve Module ** DEBUG ONLY!!!! **
+  SwerveModule* GetSwerveModulePtr(int module_num);
 
  private:
 
@@ -76,6 +81,13 @@ class Drivetrain : public frc2::SubsystemBase {
   void  OdometryPeriodic(void);
   float m_curr_x;   //inches
   float m_curr_y;   //inches
+
+
+  //To calculate Velocity
+  float m_prev_x;   //inches
+  float m_prev_y;   //inches
+  float m_curr_v;   //ticks/
+  float m_prev_timestamp;
 
   //Swerve Modules
   //    FL^FR
