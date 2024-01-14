@@ -7,6 +7,9 @@
 #include "Robot.h"
 #include <iostream>
 
+//Allow deprecated Phoenix 5 API in swerve module
+#include <wpi/deprecated.h>
+WPI_IGNORE_DEPRECATED
 
 //Falcon steer ticks per degree
 // MK4i steer ratio 150/7:1.   Integrated encoder = 2048 ticks/rotation

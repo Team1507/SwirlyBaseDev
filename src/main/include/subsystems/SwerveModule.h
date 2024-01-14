@@ -8,7 +8,11 @@
 #include <frc/Timer.h>
 
 
+//Allow deprecated Phoenix 5 API in swerve module
+#include <wpi/deprecated.h>
+WPI_IGNORE_DEPRECATED
 #include "ctre/Phoenix.h"
+
 
 class SwerveModule : public frc2::SubsystemBase {
  public:
