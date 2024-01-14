@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <frc2/command/CommandBase.h>
+#include <frc2/command/Command.h>
 #include <frc2/command/CommandHelper.h>
 #include <frc/Timer.h>
 
@@ -16,7 +16,7 @@
  * Command will *not* work!
  */
 class CmdDriveToPoint
-    : public frc2::CommandHelper<frc2::CommandBase, CmdDriveToPoint> {
+    : public frc2::CommandHelper<frc2::Command, CmdDriveToPoint> {
  public:
   CmdDriveToPoint( float x, float y, float heading, float velocity, bool stop, float timeout);
 

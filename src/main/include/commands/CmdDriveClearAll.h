@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <frc2/command/CommandBase.h>
+#include <frc2/command/Command.h>
 #include <frc2/command/CommandHelper.h>
 
 
@@ -16,7 +16,7 @@
  * Command will *not* work!
  */
 class CmdDriveClearAll
-    : public frc2::CommandHelper<frc2::CommandBase, CmdDriveClearAll> {
+    : public frc2::CommandHelper<frc2::Command, CmdDriveClearAll> {
  public:
   CmdDriveClearAll();
 

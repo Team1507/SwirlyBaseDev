@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <frc2/command/CommandBase.h>
+#include <frc2/command/Command.h>
 #include <frc2/command/CommandHelper.h>
 
 /**
@@ -15,7 +15,7 @@
  * Command will *not* work!
  */
 class CmdDriveWithGamepad
-    : public frc2::CommandHelper<frc2::CommandBase, CmdDriveWithGamepad> {
+    : public frc2::CommandHelper<frc2::Command, CmdDriveWithGamepad> {
  public:
   CmdDriveWithGamepad();
 

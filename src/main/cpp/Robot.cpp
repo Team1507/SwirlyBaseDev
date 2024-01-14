@@ -18,7 +18,7 @@ void Robot::RobotInit()
 {
   //*************************** INIT ******************************
   std::cout<<"RobotInit"<<std::endl;
-  std::cout<<"FRC2023: SwirlyBaseDev"<<std::endl;
+  std::cout<<"FRC2024: SwirlyBaseDev2024"<<std::endl;
   std::cout<<"Version: " << __DATE__ <<"  "<<__TIME__<<std::endl<<std::endl; 
   //GithubTest
 
