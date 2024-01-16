@@ -54,8 +54,8 @@ SwerveModule::SwerveModule(int driveMotorCanID, int steerMotorCanID, int steerEn
     m_driveMotor.ConfigVoltageCompSaturation(12.0,10);
     m_driveMotor.EnableVoltageCompensation(true);
 
-    m_driveMotor.ConfigOpenloopRamp(0.5,0);
-    m_driveMotor.ConfigClosedloopRamp(0.5,0);
+    m_driveMotor.ConfigOpenloopRamp(0.25,0);   //Was 0.5.  Ram was too noticable.
+    m_driveMotor.ConfigClosedloopRamp(0.25,0);
 
     m_driveMotor.ConfigNeutralDeadband(0.001,10);   //Minimal deadband in drive falcon to prevent stuttering at slow speed
 
