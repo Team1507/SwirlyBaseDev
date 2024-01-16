@@ -45,23 +45,23 @@ void CmdDriveWithGamepad::Execute()
   const float xyScaleValue  = 0.5;
   const float rScaleValue   = 0.5;
 
-  // const float DEADBAND  = 0.10;
+  const float DEADBAND  = 0.20;
 
   // //Square Inputs???
   // leftY  = ( leftY  < 0 ) ? -pow(  leftY,  2) : pow(  leftY,  2);
   // leftX  = ( leftX  < 0 ) ? -pow(  leftX,  2) : pow(  leftX,  2);
   // rightX = ( rightX < 0 ) ? -pow( rightX,  2) : pow( rightX,  2);
 
-  // //Remove Deadband.  Reduces precision driving with huge deadband.
-  // //Apply DeadBand
-  // if (fabs(leftY)  < DEADBAND) leftY  = 0;
-  // if (fabs(leftX)  < DEADBAND) leftX  = 0;
-  // if (fabs(rightX) < DEADBAND) rightX = 0;
+  // Re-apply deadband - bad controller
+  //Apply DeadBand
+  if (fabs(leftY)  < DEADBAND) leftY  = 0;
+  if (fabs(leftX)  < DEADBAND) leftX  = 0;
+  if (fabs(rightX) < DEADBAND) rightX = 0;
 
-  // //Subtract off deadband for smooth transition 
-  // if (fabs(leftY) >= DEADBAND) leftY  +=   (leftY>0)? -DEADBAND : +DEADBAND;
-  // if (fabs(leftX) >= DEADBAND) leftX  +=   (leftX>0)? -DEADBAND : +DEADBAND;
-  // if (fabs(rightX)>= DEADBAND) rightX +=  (rightX>0)? -DEADBAND : +DEADBAND;
+  //Subtract off deadband for smooth transition 
+  if (fabs(leftY) >= DEADBAND) leftY  +=   (leftY>0)? -DEADBAND : +DEADBAND;
+  if (fabs(leftX) >= DEADBAND) leftX  +=   (leftX>0)? -DEADBAND : +DEADBAND;
+  if (fabs(rightX)>= DEADBAND) rightX +=  (rightX>0)? -DEADBAND : +DEADBAND;
 
 
   //Apply max velocity and scaling
