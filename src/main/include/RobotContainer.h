@@ -8,6 +8,9 @@
 #include <frc/XboxController.h>
 #include <frc/Timer.h>
 
+#include <frc2/command/button/JoystickButton.h>
+
+
 #include "subsystems/Drivetrain.h"
 #include "subsystems/LogFile.h"
 #include "subsystems/LedRing.h"
@@ -33,4 +36,9 @@ class RobotContainer {
 
  private:
   void ConfigureBindings();
+
+
+  frc2::JoystickButton m_botDriver_START {&m_botDriver, frc::XboxController::Button::kStart };
+
+
 };

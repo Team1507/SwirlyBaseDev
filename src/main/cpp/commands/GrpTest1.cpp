@@ -10,6 +10,7 @@
 
 #include "commands/CmdLogFileEnable.h"
 #include "commands/CmdDriveToPoint.h"
+#include "commands/CmdDriveTurn2Angle.h"
 
 GrpTest1::GrpTest1() {
   AddCommands
@@ -21,7 +22,7 @@ GrpTest1::GrpTest1() {
     //---------------------------------------
 
 
-    CmdLogFileEnable(true),
+    //CmdLogFileEnable(true),
 
     // CmdDriveToPoint(   0, 60, 0, 2000, false, 10.0 ),
     // CmdDriveToPoint( -60, 60, 0, 2000, false, 10.0 ),
@@ -33,14 +34,43 @@ GrpTest1::GrpTest1() {
     // CmdDriveToPoint( -60,  0, 0, 2000, false, 10.0 ),
     // CmdDriveToPoint(   0,  0, 0, 2000, true,  10.0 ),
 
-    CmdDriveToPoint( -60, 60, -90, 2000, false, 10.0 ),
-    CmdDriveToPoint(   0, 60,   0, 2000, false, 10.0 ),
-    CmdDriveToPoint( -60,  0,  90, 2000, false, 10.0 ),
-    CmdDriveToPoint(   0,  0,   0, 2000, true,  10.0 ),
+    // CmdDriveToPoint( -60, 60, -90, 2000, false, 10.0 ),
+    // CmdDriveToPoint(   0, 60,   0, 2000, false, 10.0 ),
+    // CmdDriveToPoint( -60,  0,  90, 2000, false, 10.0 ),
+    // CmdDriveToPoint(   0,  0,   0, 2000, true,  10.0 ),
 
 
-    CmdLogFileEnable(false),
+    //CmdLogFileEnable(false),
 
+    
+    //Auto Testing....
+
+    //Turn towards target and shoot
+    CmdDriveTurn2Angle( 0.35, 45.0 ),
+    frc2::WaitCommand( 1.0_s ),
+    CmdDriveTurn2Angle( 0.35, -45.0 ),
+
+    //Drive to next note
+    CmdDriveToPoint(   0, 45, 0, 6000, true, 10.0 ),
+
+    frc2::WaitCommand( 0.5_s ),
+
+
+    //Shoot second note
+    CmdDriveTurn2Angle( 0.35, 30.0 ),
+    frc2::WaitCommand( 1.0_s ),
+    CmdDriveTurn2Angle( 0.35, -30.0 ),
+
+
+    //Drive to Third note and back
+    CmdDriveToPoint(   0, 100, 0, 8000, true, 10.0 ),
+    CmdDriveToPoint(   0, 45,  0, 8000, true, 10.0 ),
+
+
+    //Shoot Third note
+    CmdDriveTurn2Angle( 0.25, 30.0 ),
+    frc2::WaitCommand( 1.0_s ),
+    CmdDriveTurn2Angle( 0.25, -30.0 ),
 
 
     //---------------------------------------

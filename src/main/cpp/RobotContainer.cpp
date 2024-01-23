@@ -45,6 +45,9 @@ RobotContainer::RobotContainer()
 
 void RobotContainer::ConfigureBindings() 
 {
+  
+  m_botDriver_START.OnTrue(new CmdDriveZeroGyro());
+
 
 }
 
