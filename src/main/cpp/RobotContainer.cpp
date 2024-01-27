@@ -15,6 +15,7 @@
 #include "commands/GrpTest1.h"
 #include "commands/GrpTest2.h"
 #include "commands/CmdDriveZeroGyro.h"
+#include "commands/CmdDriveAimAtTarget.h"
 
 
 RobotContainer::RobotContainer() 
@@ -46,8 +47,9 @@ RobotContainer::RobotContainer()
 void RobotContainer::ConfigureBindings() 
 {
   
-  m_botDriver_START.OnTrue(new CmdDriveZeroGyro());
+  m_botDriver_Start.OnTrue(new CmdDriveZeroGyro());
 
+  m_botDriver_Rbumper.OnTrue(new CmdDriveAimAtTarget());
 
 }
 

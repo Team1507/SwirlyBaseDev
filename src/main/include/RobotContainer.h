@@ -42,7 +42,8 @@ class RobotContainer {
   void ConfigureBindings();
 
 
-  frc2::JoystickButton m_botDriver_START {&m_botDriver, frc::XboxController::Button::kStart };
+  frc2::JoystickButton m_botDriver_Start   {&m_botDriver, frc::XboxController::Button::kStart };
+  frc2::JoystickButton m_botDriver_Rbumper {&m_botDriver, frc::XboxController::Button::kRightBumper };
 
 
 };

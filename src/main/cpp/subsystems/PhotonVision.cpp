@@ -19,6 +19,11 @@ PhotonVision::PhotonVision()
 
 void PhotonVision::Periodic() 
 {
+
+    //Assune the worst
+    m_targetValid = false;
+    m_targetYaw   = 0.0;
+
     // Query the latest result from PhotonVision
     photon::PhotonPipelineResult result = camera.GetLatestResult();
 
@@ -57,29 +62,26 @@ void PhotonVision::Periodic()
 
         //---- Specific Target --------------------------
 
-        int  myTargetId    = (int)frc::SmartDashboard::GetNumber("PV-MT Id",    0 );
-
-        bool myTargetFound = false;
+        int  m_targetId    = (int)frc::SmartDashboard::GetNumber("PV-MT Id",    0 );
         int  myTargetIndex = 0;
 
         //Look for Target Id in list
         for( unsigned int i=0; i<targetList.size(); i++ )
         {
-            if( targetList[i].GetFiducialId() == myTargetId)
+            if( targetList[i].GetFiducialId() == m_targetId)
             {
 
-                myTargetFound = true;
+                m_targetValid = true;
                 myTargetIndex = i;
                 break;
             }
         }
 
-        //Is target found?
-        frc::SmartDashboard::PutBoolean("PV-MT Target", myTargetFound);
 
-        if(myTargetFound )
+        //Is target found?
+        if(m_targetValid )
         {
-            frc::SmartDashboard::PutNumber("PV-MT Yaw",   targetList[myTargetIndex].GetYaw() );
+            m_targetYaw =  targetList[myTargetIndex].GetYaw();
         }
 
 
@@ -89,12 +91,36 @@ void PhotonVision::Periodic()
         //NO TARGETS DETECTED
         frc::SmartDashboard::PutNumber("PV Tsize", 0  );
         frc::SmartDashboard::PutString("PV Tlist", "" );
-
-        frc::SmartDashboard::PutBoolean("PV-MT Target", false);
     }
 
 
-    
-
+    //Status Update
+    frc::SmartDashboard::PutBoolean("PV-MT Target", m_targetValid);
+    frc::SmartDashboard::PutNumber("PV-MT Yaw",     m_targetYaw  );
 
 }
+
+
+
+
+
+  void  PhotonVision::SetTargetId(int id)
+  {
+    //Using smartdashboard to pick target ID
+    //m_targetId = id;
+  }
+  int   PhotonVision::GetTargetId(void)
+  {
+    return m_targetId;
+  }
+  bool  PhotonVision::IsTargetValid(void)
+  {
+    return m_targetValid;
+  }
+  float PhotonVision::GetTargetYaw(void)
+  {
+    if( m_targetValid)
+        return m_targetYaw;
+    else
+        return 0.0;
+  }

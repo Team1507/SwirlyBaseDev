@@ -13,6 +13,12 @@ class PhotonVision : public frc2::SubsystemBase {
   PhotonVision();
 
 
+  void  SetTargetId(int id);
+  int   GetTargetId(void);
+  bool  IsTargetValid(void);
+  float GetTargetYaw(void);
+
+
   void Periodic() override;
 
  private:
@@ -20,6 +26,9 @@ class PhotonVision : public frc2::SubsystemBase {
   //photon::PhotonCamera camera{"photonvision"};
   photon::PhotonCamera camera{"Shooter-cam"};
 
+  int   m_targetId;       //Target ID we are interested in looking for.
+  bool  m_targetValid;
+  float m_targetYaw;
 
 
 };
