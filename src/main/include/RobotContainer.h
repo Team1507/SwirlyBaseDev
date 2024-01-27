@@ -14,6 +14,7 @@
 #include "subsystems/Drivetrain.h"
 #include "subsystems/LogFile.h"
 #include "subsystems/LedRing.h"
+#include "subsystems/PhotonVision.h"
 
 
 class RobotContainer {
@@ -26,10 +27,13 @@ class RobotContainer {
   frc::Timer m_timer;
 
   //****************Subsystems*******************
-  Drivetrain m_drivetrain;
-  LogFile    m_logFile;
+  Drivetrain   m_drivetrain;
+  LogFile      m_logFile;
 
-  LedRing    m_ledRing;
+  LedRing      m_ledRing;
+
+  PhotonVision m_PhotonVision;
+
 
 
   frc2::CommandPtr GetAutonomousCommand();
