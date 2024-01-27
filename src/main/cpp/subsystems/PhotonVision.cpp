@@ -8,7 +8,8 @@
 #include <photon/PhotonUtils.h>
 #include <iostream>
 
-
+#include <units/angle.h>
+#include <units/length.h>
 
 
 PhotonVision::PhotonVision()
@@ -21,8 +22,9 @@ void PhotonVision::Periodic()
 {
 
     //Assune the worst
-    m_targetValid = false;
-    m_targetYaw   = 0.0;
+    m_targetValid    = false;
+    m_targetYaw      = 0.0;
+    m_targetDistance = 0.0;
 
     // Query the latest result from PhotonVision
     photon::PhotonPipelineResult result = camera.GetLatestResult();
@@ -82,8 +84,23 @@ void PhotonVision::Periodic()
         if(m_targetValid )
         {
             m_targetYaw =  targetList[myTargetIndex].GetYaw();
-        }
 
+            const units::meter_t  CAMERA_HEIGHT = 10_in;
+            const units::meter_t  TARGET_HEIGHT = 57_in;
+            const units::radian_t CAMERA_PITCH  = 25_deg;
+
+            //This function may calculate the floor X-Y distance rather than the hypotenuse distance
+            //from camera to AprilTag
+            units::meter_t range = photon::PhotonUtils::CalculateDistanceToTarget(
+                                        CAMERA_HEIGHT,
+                                        TARGET_HEIGHT,
+                                        CAMERA_PITCH,
+                                        units::degree_t{ targetList[myTargetIndex].GetPitch() }
+                                    );
+
+            m_targetDistance = (float)(units::inch_t)range;
+
+        }
 
     }
     else
@@ -97,6 +114,7 @@ void PhotonVision::Periodic()
     //Status Update
     frc::SmartDashboard::PutBoolean("PV-MT Target", m_targetValid);
     frc::SmartDashboard::PutNumber("PV-MT Yaw",     m_targetYaw  );
+    frc::SmartDashboard::PutNumber("PV-MT Range",   m_targetDistance  );
 
 }
 

@@ -29,6 +29,7 @@ class PhotonVision : public frc2::SubsystemBase {
   int   m_targetId;       //Target ID we are interested in looking for.
   bool  m_targetValid;
   float m_targetYaw;
+  float m_targetDistance;
 
 
 };
