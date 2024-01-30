@@ -38,6 +38,8 @@ void CmdDriveWithGamepad::Execute()
   float leftX  = robotcontainer.m_botDriver.GetLeftX();
   float rightX = robotcontainer.m_botDriver.GetRightX();
 
+  bool  testA  = robotcontainer.m_botDriver.GetAButton();  //while pressed
+
   const float xyMaxVelocity = 19600; //
   const float rMaxVelocity  = 13000; //
 
@@ -68,6 +70,25 @@ void CmdDriveWithGamepad::Execute()
   float fwdrev    = -(leftY  * xyMaxVelocity * xyScaleValue);    //Invert Axis, make positive forward
   float rightleft =  (leftX  * xyMaxVelocity * xyScaleValue);    
   float rotate    = -(rightX * rMaxVelocity  * rScaleValue);     //Invert Axis, make positive CCW
+
+
+  //On the move aim test
+  if(testA )
+  {
+
+    float delta_angle = robotcontainer.m_PhotonVision.GetTargetYaw();
+
+    float turn_velocity = delta_angle *400.0;
+
+    if( turn_velocity >  3000.0 ) turn_velocity =  3000.0;
+    if( turn_velocity < -3000.0 ) turn_velocity = -3000.0;
+
+    rotate = -turn_velocity;
+
+    frc::SmartDashboard::PutNumber("TestA TurnVelocity", turn_velocity);
+    
+  }
+
 
   if( robotcontainer.m_drivetrain.GetDriveType() == Drivetrain::ROBOTCENTRIC )
     robotcontainer.m_drivetrain.RobotcentricDriveVelocity( fwdrev,  rightleft,  rotate );
