@@ -16,6 +16,7 @@
 #include "commands/GrpTest2.h"
 #include "commands/CmdDriveZeroGyro.h"
 #include "commands/CmdDriveAimAtTarget.h"
+#include "commands/AutoTwoPieceRedThree.h"
 
 #include "commands/AutoTestGroup.h"
 
@@ -37,6 +38,7 @@ RobotContainer::RobotContainer()
 
 
   frc::SmartDashboard::PutData( "AutoTestGroup",         new AutoTestGroup());
+  frc::SmartDashboard::PutData( "AutoTwoPieceRedThree",  new AutoTwoPieceRedThree());
 
 
   //Smartdashboard SwerveDrive test/calibration buttons
