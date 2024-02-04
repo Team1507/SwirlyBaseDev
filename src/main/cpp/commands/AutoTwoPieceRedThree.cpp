@@ -9,7 +9,8 @@
 #include "commands/CmdDriveForceSteerAngle.h"
 #include "Robot.h"
 
-AutoTwoPieceRedThree::AutoTwoPieceRedThree() {
+AutoTwoPieceRedThree::AutoTwoPieceRedThree() 
+{
 
   AddCommands(
 
