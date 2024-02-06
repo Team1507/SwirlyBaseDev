@@ -10,7 +10,14 @@
 #include "Robot.h"
 
 
+
 AutoTwoPieceRedTwo::AutoTwoPieceRedTwo() 
 {
- 
+  AddCommands(
+    CmdPrintText("Auto Two Piece Red Two Started"),
+    CmdDriveClearAll(),
+    CmdDriveToPoint(0, 60, 0, 2000, true, 10),
+    CmdDriveStop(),
+    CmdPrintText("Auto Two Piece Red Two Started")
+  );
 }
