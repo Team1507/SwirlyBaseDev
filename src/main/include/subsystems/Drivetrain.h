@@ -10,8 +10,16 @@
 #include "AHRS.h"
 
 #include "Constants.h"
+#include <pathplanner/lib/auto/AutoBuilder.h>
+#include <pathplanner/lib/util/HolonomicPathFollowerConfig.h>
+#include <pathplanner/lib/util/PIDConstants.h>
+#include <pathplanner/lib/util/ReplanningConfig.h>
+#include <frc/geometry/Pose2d.h>
+#include <frc/kinematics/ChassisSpeeds.h>
+#include <frc/DriverStation.h>
 
 
+using namespace pathplanner;
 
 class Drivetrain : public frc2::SubsystemBase {
  public:
@@ -58,6 +66,9 @@ class Drivetrain : public frc2::SubsystemBase {
   float  GetOdometryY(void);           //inches
   float  GetOdometryHeading(void);     //degrees
   float  GetOdometryVelocity(void);    //??
+  float GetPose(void);
+  void ResetPose(void); //Put in pose later?
+
 
   //Absolute Encoder calibration
   void   CalibrateSteerEncoderAbsoutePositionStart(void);
@@ -100,6 +111,6 @@ class Drivetrain : public frc2::SubsystemBase {
 
   //Array of pointers to swerve modules, to make processing each module more convenient
   SwerveModule* m_moduleList[NUM_SWERVE_MODULES];
-
+  frc::Pose2d m_pose{};
 
 };

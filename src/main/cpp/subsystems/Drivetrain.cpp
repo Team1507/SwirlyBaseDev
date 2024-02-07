@@ -9,6 +9,7 @@
 #include "frc/smartdashboard/SmartDashboard.h"
 
 
+
 //         ^
 //     FR  |  FR
 //         .
@@ -78,9 +79,35 @@ Drivetrain::Drivetrain()
     m_moduleList[FR_INDEX] = &m_frontRight;    
     m_moduleList[FL_INDEX] = &m_frontLeft;    
     m_moduleList[RL_INDEX] = &m_rearLeft;    
-    m_moduleList[RR_INDEX] = &m_rearRight;    
+    m_moduleList[RR_INDEX] = &m_rearRight;   
 
-}
+     AutoBuilder::configureHolonomic(
+        [this](){ return GetGyroAngle(); }, // Robot pose supplier
+        [this](frc::Pose2d pose){ ResetOdometry(); }, // Method to reset odometry (will be called if your auto has a starting pose)
+        [this](){ return GetOdometryVelocity(); }, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
+        [this](frc::ChassisSpeeds speeds){ RobotcentricDrive(5,5,5); }, // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds
+        HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in your Constants class
+            PIDConstants(5.0, 0.0, 0.0), // Translation PID constants
+            PIDConstants(5.0, 0.0, 0.0), // Rotation PID constants
+            4.5_mps, // Max module speed, in m/s
+            0.4_m, // Drive base radius in meters. Distance from robot center to furthest module.
+            ReplanningConfig() // Default path replanning config. See the API for the options here
+        ),
+        []() {
+            // Boolean supplier that controls when the path will be mirrored for the red alliance
+            // This will flip the path being followed to the red side of the field.
+            // THE ORIGIN WILL REMAIN ON THE BLUE SIDE
+
+            auto alliance = frc::DriverStation::GetAlliance();
+            if (alliance) {
+                return alliance.value() == frc::DriverStation::Alliance::kRed;
+            }
+            return false;
+        },
+        this // Reference to this subsystem to set requirements
+    );
+} 
+
 
 // This method will be called once per scheduler run
 void Drivetrain::Periodic() 
@@ -521,9 +548,15 @@ void Drivetrain::CalibrateSteerEncoderAbsoutePositionOffset(void)
         m_moduleList[i]->CalibrateSteerEncoderAbsoutePositionOffset();
 }
 
+float Drivetrain::GetPose()
+{
+    return m_pose;
+}
+
 //DebugOnly
 SwerveModule* Drivetrain::GetSwerveModulePtr(int module_num)
 {
     return m_moduleList[module_num];
 }
+
 
