@@ -20,11 +20,11 @@ AutoThreePieceRedOne::AutoThreePieceRedOne()
     //Drive Back & Turn To Pickup Piece
     CmdDriveToPoint(0, 50, 0, 2000, true, 10),
     //Shoot Second Piece
-    CmdDriveTurn2Angle(0.2,-45),
+    CmdDriveTurn2Angle(0.2, -45),
     //Go to grab third piece
-    CmdDriveToPoint(56.5, 55, 90, 2000, true, 10),
+    CmdDriveToPoint(56.5, 65, 90, 2000, true, 10),
     //Turn to shoot
-    CmdDriveToPoint(0,0,0,3000,true,10),
+    CmdDriveTurn2Angle(0.2, -90),
     //Code End
     CmdPrintText("Auto Three Piece Red One Ended"),
     CmdDriveStop()

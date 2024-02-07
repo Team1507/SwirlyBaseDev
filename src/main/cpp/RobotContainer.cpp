@@ -18,6 +18,9 @@
 #include "commands/CmdDriveAimAtTarget.h"
 #include "commands/AutoTwoPieceRedThree.h"
 #include "commands/AutoThreePieceRedOne.h"
+#include "commands/AutoThreePieceRedThree.h"
+#include "commands/AutoFourPieceRedOne.h"
+#include "commands/AutoFivePieceRedOne.h"
 
 #include "commands/AutoTestGroup.h"
 
@@ -39,8 +42,11 @@ RobotContainer::RobotContainer()
 
 
   frc::SmartDashboard::PutData( "AutoTestGroup",         new AutoTestGroup());
-  frc::SmartDashboard::PutData( "AutoTwoPieceRedThree",  new AutoTwoPieceRedThree());
+  frc::SmartDashboard::PutData( "AutoTwoPieceRedOne",    new AutoTwoPieceRedThree());
   frc::SmartDashboard::PutData( "AutoThreePieceRedOne",  new AutoThreePieceRedOne());
+  frc::SmartDashboard::PutData( "AutoThreePieceRedThree",new AutoThreePieceRedThree());
+  frc::SmartDashboard::PutData( "AutoFourPieceRedOne",   new AutoFourPieceRedOne());
+  frc::SmartDashboard::PutData( "AutoFivePieceRedOne",   new AutoFivePieceRedOne());
 
   //Smartdashboard SwerveDrive test/calibration buttons
   frc::SmartDashboard::PutData( "SteerAngle=0",          new CmdDriveForceSteerAngle( &m_drivetrain, 0.0));

@@ -23,7 +23,7 @@ AutoThreePieceRedThree::AutoThreePieceRedThree()
     //Turn to shoot
     CmdDriveTurn2Angle(0.2,45),
     //Back Up To Grab Third Piece
-    CmdDriveToPoint(7,212,0,3000,true,10),
+    CmdDriveToPoint(20,250,0,3000,true,10),
     //Drive close to speaker
     CmdDriveToPoint(0,150,0,3000,true,10),
     CmdDriveAimAtTarget(),
