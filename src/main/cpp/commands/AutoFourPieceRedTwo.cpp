@@ -17,13 +17,13 @@ AutoFourPieceRedTwo::AutoFourPieceRedTwo()
     //Shoot Note
     CmdDriveToPoint(0, -40, 0, 2000, true, 10),
     //Shoot Note
-    CmdDriveToPoint(50, 0, 0, 2000, true, 10),
+    CmdDriveToPoint(50, -40, 0, 2000, true, 10),
     CmdDriveTurn2Angle(0.2, 45),
     //Shoot Note
     CmdDriveTurn2Angle(0.2, -45),
-    CmdDriveToPoint(19, 0, 0, 2000, true, 10),
-    CmdDriveToPoint(0, -211, 0, 2000, true, 10),
-    CmdDriveToPoint(0, 96, 0, 2000, true, 10),
+    CmdDriveToPoint(69, -40, 0, 2000, true, 10),
+    CmdDriveToPoint(69, 171, 0, 2000, true, 10),
+    CmdDriveToPoint(69, 75, 0, 2000, true, 10),
     CmdDriveTurn2Angle(0.2, 45),
     //Shoot Note
     CmdPrintText("Auto Four Piece Red Two Ended"),
