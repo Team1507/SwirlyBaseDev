@@ -15,14 +15,20 @@
 #include <pathplanner/lib/util/PIDConstants.h>
 #include <pathplanner/lib/util/ReplanningConfig.h>
 #include <frc/geometry/Pose2d.h>
+#include <frc/geometry/Rotation2d.h>
 #include <frc/kinematics/ChassisSpeeds.h>
 #include <frc/DriverStation.h>
+
 
 
 using namespace pathplanner;
 
 class Drivetrain : public frc2::SubsystemBase {
  public:
+  //void Pose2d​(double x, double y, Rotation2d rotation);
+
+  //static Rotation2d	fromDegrees​(double degrees)
+  
   Drivetrain();
 
   void Periodic() override;
@@ -60,13 +66,13 @@ class Drivetrain : public frc2::SubsystemBase {
   float  GetGyroRoll(void);
   void   SetAngleOffset(float angle);
 
+  frc::Pose2d GetPose(void);
   //Odometry
   void   ResetOdometry(void);
   float  GetOdometryX(void);           //inches
   float  GetOdometryY(void);           //inches
   float  GetOdometryHeading(void);     //degrees
   float  GetOdometryVelocity(void);    //??
-  float GetPose(void);
   void ResetPose(void); //Put in pose later?
 
 
@@ -111,6 +117,4 @@ class Drivetrain : public frc2::SubsystemBase {
 
   //Array of pointers to swerve modules, to make processing each module more convenient
   SwerveModule* m_moduleList[NUM_SWERVE_MODULES];
-  frc::Pose2d m_pose{};
-
 };

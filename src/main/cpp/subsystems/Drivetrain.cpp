@@ -82,9 +82,9 @@ Drivetrain::Drivetrain()
     m_moduleList[RR_INDEX] = &m_rearRight;   
 
      AutoBuilder::configureHolonomic(
-        [this](){ return GetGyroAngle(); }, // Robot pose supplier
+        [this](frc::Pose2d){ return GetPose(); }, // Robot pose supplier
         [this](frc::Pose2d pose){ ResetOdometry(); }, // Method to reset odometry (will be called if your auto has a starting pose)
-        [this](){ return GetOdometryVelocity(); }, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
+        [this](frc::ChassisSpeeds speeds){ return GetOdometryVelocity(); }, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
         [this](frc::ChassisSpeeds speeds){ RobotcentricDrive(5,5,5); }, // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds
         HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in your Constants class
             PIDConstants(5.0, 0.0, 0.0), // Translation PID constants
@@ -546,11 +546,6 @@ void Drivetrain::CalibrateSteerEncoderAbsoutePositionOffset(void)
 {
     for(int i=0;i<NUM_SWERVE_MODULES;i++)
         m_moduleList[i]->CalibrateSteerEncoderAbsoutePositionOffset();
-}
-
-float Drivetrain::GetPose()
-{
-    return m_pose;
 }
 
 //DebugOnly
