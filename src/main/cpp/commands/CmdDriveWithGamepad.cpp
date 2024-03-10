@@ -44,8 +44,8 @@ void CmdDriveWithGamepad::Execute()
   const float rMaxVelocity  = 13000; //
 
 
-  const float xyScaleValue  = 0.5;
-  const float rScaleValue   = 0.5;
+  const float xyScaleValue  = 0.7;
+  const float rScaleValue   = 0.7;
 
   const float DEADBAND  = 0.20;
 
